@@ -33,6 +33,16 @@ php artisan migrate
 ejecutar los seeders
 php artisan db:seed
 
+### Usuarios de Prueba en Seeders 🔧
+
+Name:     Admin
+Email:    admin@example.com
+Password: secret
+
+Name:     User
+Email:    user@example.com
+Password: secret
+
 ## Construido con 🛠️
 
 * [AdminLTE](https://adminlte.io/) - Frondend con Boostrap y jquery
