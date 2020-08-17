@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRentalDateTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,18 @@ class CreateRentalDateTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_date', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->date('departure_date');
-            $table->date('admission_date');
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('car_id');
             $table->timestamps();
-            $table->softDeletes();
-
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('car_id')
-                ->references('id')
-                ->on('cars')
-                ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
     }
@@ -43,6 +36,6 @@ class CreateRentalDateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_date');
+        Schema::dropIfExists('role_user');
     }
 }

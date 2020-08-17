@@ -16,13 +16,21 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('registration', 45);
-            $table->string('color', 6)->default('000000');
+            $table->string('color', 7)->default('#000000');
             $table->year('year');
-            $table->string('model', 45);
             $table->string('description', 255)->nullable();
             $table->integer('price');
+            $table->string('picture_url')->default('/img/default/Clasic-car.jpg');
+            $table->unsignedBigInteger('model_id');
+            $table->boolean('status')->default(false);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('model_id')
+                ->references('id')
+                ->on('models')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
