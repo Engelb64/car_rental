@@ -43,6 +43,7 @@
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th>Precio</th>
+                            <th>Estado</th>
                             <th>Ver</th>
                             <th>Eliminar</th>
                         </tr>
@@ -56,6 +57,11 @@
                                 <td>{{ $car->brandname }}</td>
                                 <td>{{ $car->modelname }}</td>
                                 <td>{{ $car->price }}</td>
+                                @if ($car->status == 1)
+                                <td>Disponible</td>
+                                @else
+                                <td>No Disponible</td>
+                                @endif
                                 <td class="aling-items-center ">
                                     <form action="{{ Request::url() }}/{{ $car->id }}" method="GET">
                                         <button class="bg-primary"><i class="fas fa-eye"> </i></button>
@@ -122,11 +128,12 @@
                             <input id="price" name="price" type="text" class="form-control" required>
                         </div>
                     </div>
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Color</label>
                             <div class="input-group my-colorpicker2">
-                                <input name="color" type="text" class="form-control" required>
+                                <input name="color" type="text" class="form-control" required autocomplete="off">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-square"></i></span>
                                 </div>
@@ -141,16 +148,26 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <div class="input-group">
                                 <label>Seleccione una imagen del Vehículo
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="file" name="file" required>
+                                        <input type="file" class="custom-file-input" id="file" name="file">
                                         <label class="custom-file-label">Imagen ...</label>
                                     </div>
                                 </label>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select id="status" name="status" class="form-control" required>
+                                    <option value=1>Disponible</option>
+                                    <option value=0>No disponible</option>
+                            </select>
                         </div>
                     </div>
 

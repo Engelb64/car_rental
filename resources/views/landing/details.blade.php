@@ -75,6 +75,8 @@
                             value="{{$priceanddates->startdate}}"
                             @endif
                                 name="startdate"
+                                autocomplete="off"
+                                required
                                 />
                                 End Date:
                                 <input
@@ -84,6 +86,8 @@
                                 @if ($priceanddates !=null)
                                 value="{{$priceanddates->enddate}}"
                                 @endif
+                                autocomplete="off"
+                                required
                                 />
                             </div>
 

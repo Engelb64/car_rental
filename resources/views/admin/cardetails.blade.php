@@ -99,7 +99,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="post">
+                    <form method="post"  enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="row align-items-center px-3 py-3 ">
@@ -142,7 +142,7 @@
                                 <div class="form-group">
                                     <label>Color</label>
                                     <div class="input-group my-colorpicker2">
-                                        <input name="color" type="text" class="form-control" value={{ $car->color }} required>
+                                        <input name="color" type="text" class="form-control" value={{ $car->color }} required autocomplete="off">
                                         <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-square" style="color: {{$car->color}}"></i></span>
                                         </div>
@@ -155,6 +155,34 @@
                                     <label>Año</label>
                                     <input id="price" name="year" type="text" class="form-control"
                                         value={{ $car->year }} required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label>Seleccione una imagen del Vehículo
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="file" name="file">
+                                                <label class="custom-file-label">Imagen ...</label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <select id="status" name="status" class="form-control" required>
+                                        @if ( $car->status == 1)
+                                            <option value=1 selected>Disponible</option>
+                                            <option value=0>No disponible</option>
+                                        @else
+                                            <option value=0 selected>No disponible</option>
+                                            <option value=1>Disponible</option>
+                                        @endif
+                                    </select>
                                 </div>
                             </div>
 

@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="dashboard">Admin Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('Admin Dashboard') }}">Admin Dashboard</a></li>
                             @if(!Request::is('dashboard'))
                                 <li class="breadcrumb-item active">{{ Route::current()->getName() }}</li>
                             @endif
