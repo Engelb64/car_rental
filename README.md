@@ -35,8 +35,6 @@ php artisan db:seed
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
 * [AdminLTE](https://adminlte.io/) - Frondend con Boostrap y jquery
 * [Laravel 7](https://laravel.com/) - Backend
 
