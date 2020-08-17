@@ -33,6 +33,9 @@ php artisan migrate
 ejecutar los seeders
 php artisan db:seed
 
+Crear enlace simbolico de la carpeta Storage
+php artisan storage:link
+
 ### Usuarios de Prueba en Seeders 🔧
 
 Name:     Admin
