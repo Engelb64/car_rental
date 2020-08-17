@@ -33,9 +33,17 @@ php artisan migrate
 ejecutar los seeders
 php artisan db:seed
 
-## Construido con 🛠️
+### Usuarios de Prueba en Seeders 🔧
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+Name:     Admin
+Email:    admin@example.com
+Password: secret
+
+Name:     User
+Email:    user@example.com
+Password: secret
+
+## Construido con 🛠️
 
 * [AdminLTE](https://adminlte.io/) - Frondend con Boostrap y jquery
 * [Laravel 7](https://laravel.com/) - Backend
