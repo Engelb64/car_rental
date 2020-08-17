@@ -31,8 +31,8 @@ class BrandController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validate($request, [
-            'brand_name' => 'required|max:45',
+        $request->validate([
+            'brand_name' => ['required']
         ]);
 
         if (!Brand::where('name', $request->brand_name)->first()) {
@@ -47,7 +47,7 @@ class BrandController extends Controller
     /**
      * Permite eliminar un <Brand> en base al id.
      *
-     * @PUT Brand
+     * @DELETE Brand
      *
      * @param id Id del la Marca a eliminar
      */

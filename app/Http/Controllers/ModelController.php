@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class ModelController extends Controller
 {
     /**
-     * Permite ver todos los <Cars> registrados.
+     * Retorna Vista con la lista de Modelos registradas.
      *
-     * @GET car_rental.test/api/v1/Car
+     * @GET Model
      *
      */
     public function all(Request $request)
@@ -26,38 +26,38 @@ class ModelController extends Controller
     }
 
     /**
-     * Permite ver todos los <Cars> registrados.
+     * Permite crear un <Model> los parametros especificados.
      *
-     * @GET car_rental.test/api/v1/Car
+     * @POST Model
      *
+     * @param model_name Nombre de la modelo
+     * @param brand_id   Id de la marca
      */
     public function create(Request $request)
     {
-        $this->validate($request, [
-            'model_name' => 'required|max:45',
+        $request->validate([
+            'model_name' => ['required'],
+            'brand_id' => ['required']
         ]);
 
-        if (!ModelCar::where('name', $request->model_name)->first()) {
-            $model = new ModelCar();
-            $model->name = $request->model_name;
-            $model->brand_id = $request->brand_id;
-            $model->save();
-
-            return redirect('Model');
-        }
+        $model = new ModelCar();
+        $model->name = $request->model_name;
+        $model->brand_id = $request->brand_id;
+        $model->save();
 
         return redirect('Model');
     }
 
     /**
-     * Permite ver todos los <Cars> registrados.
+     * Permite eliminar un <Model> en base al id.
      *
-     * @GET car_rental.test/api/v1/Car
+     * @DELETE Model/[$id]
      *
+     * @param id Id del la Modelo a eliminar
      */
     public function delete($id)
     {
-        $brand = Brand::find($id);
+        $brand = ModelCar::find($id);
         $brand->delete();
 
         return redirect('Model');

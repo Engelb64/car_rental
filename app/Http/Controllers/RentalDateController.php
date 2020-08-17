@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class RentalDateController extends Controller
 {
     /**
-     * Permite ver todos los <Cars> registrados.
+     * Retorna Calendario con Rentas especificando los parametros.
      *
-     * @GET car_rental.test/RetalDate
+     * @GET RentalDate
      *
      */
     public function all(Request $request)

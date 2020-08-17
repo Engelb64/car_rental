@@ -11,6 +11,7 @@ use App\ModelCar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 use stdClass;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -58,13 +59,12 @@ class CarController extends Controller
      */
     public function create(Request $request)
     {
-        // $this->validate($request, [
-        //     'registration' => 'required',
-        //     'color' => 'required',
-        //     'year' => 'required',
-        //     'price' => 'required',
-        //     'model_id' => 'required'
-        // ]);
+        $request->validate([
+            'registration' => ['required'],
+            'color' => ['required'],
+            'year' => ['required'],
+            'price' => ['required'],
+        ]);
 
         if ($request->file()) {
             $fileName = time() . '_' . $request->file->getClientOriginalName();
@@ -79,7 +79,7 @@ class CarController extends Controller
         $car->price = $request->price;
         $car->model_id = $request->model;
         $car->picture_url = '/storage/' . $filePath;
-
+        $car->status = $request->status;
         $car->save();
 
         return redirect('Car');
@@ -126,13 +126,12 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'registration' => 'required|max:45',
-        //     'color' => 'required|max:8',
-        //     'year' => 'required|max:5',
-        //     'price' => 'required|max:45',
-        //     'model_id' => 'required'
-        // ]);
+        $request->validate([
+            'registration' => ['required'],
+            'color' => ['required'],
+            'year' => ['required'],
+            'price' => ['required'],
+        ]);
 
         $car = Car::find($id);
         $car->registration = $request->registration;
@@ -141,6 +140,14 @@ class CarController extends Controller
         $car->description = $request->description;
         $car->price = $request->price;
         $car->model_id = $request->model;
+
+        if ($request->file()) {
+            $fileName = time() . '_' . $request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+            $car->picture_url = '/storage/' . $filePath;
+        }
+
+        $car->status = $request->status;
         $car->save();
 
         return redirect('Car/' . $id);
@@ -183,7 +190,7 @@ class CarController extends Controller
      */
     public function carsAvailable(Request $request)
     {
-        $cars = Car::all();
+        $cars = Car::where('status', 1)->get();
 
         foreach ($cars as $car) {
             $car->ModelAndBrand();

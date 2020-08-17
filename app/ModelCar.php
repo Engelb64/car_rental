@@ -22,13 +22,4 @@ class ModelCar extends Model
         'name',
         'brand_id',
     ];
-
-
-    /**
-     * Get the chanllenge that owns the extended challenge.
-     */
-    public function Brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
 }
